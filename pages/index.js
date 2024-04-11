@@ -62,10 +62,10 @@ export default function Home() {
       </Head>
 
       <h1 className="py-6 text-center font-bold text-2xl">
-        Dream something with{" "}
-        <a href="https://replicate.com/stability-ai/sdxl?utm_source=project&utm_project=getting-started">
+        CulinAI{" "}
+        {/* <a href="https://replicate.com/stability-ai/sdxl?utm_source=project&utm_project=getting-started">
           SDXL
-        </a>
+        </a> */}
       </h1>
 
       <form className="w-full flex" onSubmit={handleSubmit}>
