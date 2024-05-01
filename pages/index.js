@@ -5,14 +5,16 @@ import Image from "next/image";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
   const [prediction, setPrediction] = useState(null);
   const [outputImage, setOutputImage] = useState(null);
-
   const [error, setError] = useState(null);
   const imageRef = useRef(null); // Create a ref for the output image
 
 
   const handleSubmit = async (e) => {
+    setLoading(true); // Set loading to true when the process starts
+    e.preventDefault();
     e.preventDefault();
     const response = await fetch("/api/predictions", {
       method: "POST",
@@ -20,7 +22,7 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt: e.target.prompt.value,
+        prompt: "Analyze the provided image for food ingredients; if found, generate a JSON object with 'contains_food': true and 'food_items' listing up to 10 identified ingredients, otherwise 'contains_food': false with empty 'food_items'. If food is present, use the identified ingredients to create a random and detailed cooking recipe, including ingredients from the list, providing step-by-step directions separated by '--', an estimated cooking time, and a difficulty level out of 5.",
         image: imageRef.current.src, // Access the src of the image
       }),
     });
@@ -48,6 +50,8 @@ export default function Home() {
     }
 
     await handleOutput(prediction);
+
+    setLoading(false);
 
   };
 
@@ -100,6 +104,7 @@ export default function Home() {
     reader.readAsDataURL(event.target.files[0]);
   };
 
+
   return (
     <div className="container max-w-2xl mx-auto p-5">
       <Head>
@@ -121,15 +126,18 @@ export default function Home() {
         </nav>
       </header>
 
-      <p id="upload_text">show us a photo of your fridge and we will make a recipe for you!</p>
+      <header>
+        <nav>
+          <a href="/">Home</a>
+          <a href="#">Explore Page</a>
+          <a href="/saved">Saved Recipes</a>
+        </nav>
+      </header>
+
+      <p id="upload_text">Show us a photo of your fridge and we will make a recipe for you!</p>
 
       <form className="w-full flex" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          className="flex-grow"
-          name="prompt"
-          placeholder="Enter a prompt to display an image"
-        />
+
         <input
           type="file"
           className="flex-grow"
@@ -138,16 +146,22 @@ export default function Home() {
           onChange={previewImage}
         />
         <button className="button" type="submit">
-          Go!
+          Generate Recipe!
         </button>
       </form>
+
+      {loading && <p>
+        <div>
+          <img src="https://raw.githubusercontent.com/ryankawahara/CulinAI/phoebelh-patch-1/htmlCodes/generating.gif" alt="Generating" />
+        </div>
+      </p>}
+
 
       {error && <div>{error}</div>}
       <img id="output_image" height="50px" width="50px" alt="Preview" ref={imageRef} />
 
 
-
-      {prediction && (
+      {!loading && prediction && (
         <>
           {prediction.output && (
             <div className="image-wrapper mt-5">
@@ -164,7 +178,6 @@ export default function Home() {
           <p className="py-3 text-sm opacity-50">status: {prediction.status}</p>
         </>
       )}
-
 
       {outputImage && (
         <>
