@@ -116,6 +116,12 @@ main {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.tinyImage {
+  width: '456px';
+  height: '356px';
+  max-width: none;
+}
+
 #uploadsvg {
   width: 100px;
   position: relative;

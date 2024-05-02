@@ -25,7 +25,7 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt: "It is very important that only output will be one JSON object, ensure that your answer is formatted all in one singular valid JSON. Analyze the provided image to identify up to 10 food ingredients and return a JSON formatted object with 'containsfood': true and a list of up to 10 ingredients under 'fooditems' if detected, or 'containsfood': false with an empty 'fooditems' list if none are found; if ingredients are identified, add a recipe field to the JSON object that contains a single recipe that uses the identified ingredients and includes a creatively titled 'title', a detailed list of 'ingredients', step-by-step 'instructions' with each step separated by ',', an estimated 'cookingtime' in minutes, and a 'difficulty' rating from 1 to 5, with additional suggestions for garnishes and serving tips.",
+        prompt: "It is very important that only output will be one JSON object, ensure that your answer is formatted all in one singular valid JSON. Analyze the provided image to identify up to 10 food ingredients and return a JSON formatted object with 'containsfood': true and a list of up to 10 ingredients under 'fooditems' if detected, or 'containsfood': false with an empty 'fooditems' list if none are found; if ingredients are identified, add a recipe field to the JSON object that contains a single recipe that uses the identified ingredients and includes a creatively titled 'title', a detailed list of 'ingredients' with the required amounts, step-by-step 'instructions' with each step separated by ',', an estimated 'cookingtime' in minutes, and a 'difficulty' rating from 1 to 5, with additional suggestions for garnishes and serving tips.",
         image: imageRef.current.src, // Access the src of the image
       }),
     });
@@ -185,46 +185,31 @@ export default function Home() {
 
       {error && <div>{error}</div>}
 
-      {!loading && prediction && (
-        <>
-          {prediction.output && (
-            <div className="image-wrapper mt-5">
-              <p className="py-3 text-sm opacity-50">status: {prediction.output}</p>
-
-
-              {/* <Image
-                fill
-                src={prediction.output[prediction.output.length - 1]}
-                alt="output"
-                sizes="100vw"
-              /> */}
-            </div>
-          )}
-          <p className="py-3 text-sm opacity-50">status: {prediction.status}</p>
-        </>
-      )}
-
       {outputImage && (
-        <>
+        <div className="image-wrapper mt-5">
           {outputImage.output && (
-            <div className="image-wrapper mt-5">
-
-              {<Image
+            <>
+              {/* <Image
                 fill
                 src={outputImage.output[outputImage.output.length - 1]}
                 alt="output"
                 sizes="100vw"
-              />}
-            </div>
+              /> */}
+              <div className="recipeSection">
+                <RecipeComponent
+                  className="recipe"
+                  title={recipeObj["recipe"]["title"]}
+                  ingredients={recipeObj["recipe"]["ingredients"]}
+                  steps={recipeObj["recipe"]["instructions"]}
+                  imageUrl={outputImage.output[outputImage.output.length - 1]}
+                />
+              </div>
+            </>
           )}
-          <p className="py-3 text-sm opacity-50">status: {outputImage.status}</p>
-
-          <div className="recipeSection">
-            <RecipeComponent className="recipe" title={recipeObj["recipe"]["title"]} ingredients="Your Ingredients Here" steps="Your Steps Here" imageUrl="pasta.png" />
-
-          </div>
-        </>
+          {/* <p className="py-3 text-sm opacity-50">status: {outputImage.status}</p> */}
+        </div>
       )}
+
 
 
 
