@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GeneratedRecipe = () => {
+const GeneratedRecipe = ({ title, ingredients, steps, imageUrl }) => {
     return (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{ transform: 'scale(0.4)', marginRight: 'auto' }}>
@@ -12,7 +12,7 @@ const GeneratedRecipe = () => {
                     {/* Other HTML elements */}
                     <img style={{ width: '407px', height: '316px', left: '243px', top: '132px', position: 'absolute', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }} src="pasta.png" alt="Food" />
                     <div style={{ width: '688px', height: '80px', left: '716px', top: '138px', position: 'absolute', background: '#FCEAEA', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}></div>
-                    <div style={{ width: '621px', height: '51px', left: '761px', top: '152px', position: 'absolute', textAlign: 'center', color: 'black', fontSize: '38px', fontWeight: '700', wordWrap: 'break-word' }}>LEMON SHRIMP PASTA</div>
+                    <div style={{ width: '621px', height: '51px', left: '761px', top: '152px', position: 'absolute', textAlign: 'center', color: 'black', fontSize: '38px', fontWeight: '700', wordWrap: 'break-word' }}>{title}</div>
                     {/* Other HTML elements */}
                     <div style={{ width: '472px', height: '378px', left: '218px', top: '605px', position: 'absolute', background: '#FCE8E9', boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}></div>
                     <div style={{ width: '443px', height: '266px', left: '231px', top: '662px', position: 'absolute' }}>

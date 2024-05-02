@@ -5,6 +5,7 @@ import RecipeComponent from './recipe.js';
 
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+let recipeObj;
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -24,7 +25,7 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt: "Analyze the provided image to identify any food ingredients and return a JSON object with 'contains_food': true and a list of up to 10 ingredients under 'food_items' if detected, or 'contains_food': false with an empty 'food_items' list if none are found; if ingredients are identified, also generate a JSON-formatted recipe that includes a creatively titled 'title', a detailed list of 'ingredients', step-by-step 'instructions' with each step separated by ',', an estimated 'cooking_time' in minutes, and a 'difficulty' rating from 1 to 5, with additional suggestions for garnishes and serving tips.",
+        prompt: "It is very important that only output will be one JSON object, ensure that your answer is formatted all in one singular valid JSON. Analyze the provided image to identify up to 10 food ingredients and return a JSON formatted object with 'containsfood': true and a list of up to 10 ingredients under 'fooditems' if detected, or 'containsfood': false with an empty 'fooditems' list if none are found; if ingredients are identified, add a recipe field to the JSON object that contains a single recipe that uses the identified ingredients and includes a creatively titled 'title', a detailed list of 'ingredients', step-by-step 'instructions' with each step separated by ',', an estimated 'cookingtime' in minutes, and a 'difficulty' rating from 1 to 5, with additional suggestions for garnishes and serving tips.",
         image: imageRef.current.src, // Access the src of the image
       }),
     });
@@ -58,9 +59,28 @@ export default function Home() {
   };
 
 
+
+
+
   const handleOutput = async (prediction) => {
     console.log(prediction)
+
     var newPrompt = prediction.output.join(" ");
+    console.log(newPrompt);
+    try {
+      recipeObj = JSON.parse(newPrompt);
+      console.log(recipeObj);
+    }
+    catch (error) {
+      recipeObj = JSON.parse(newPrompt + "}");
+      console.log(recipeObj);
+
+    }
+
+    let ingredients = recipeObj["fooditems"].join(" ")
+    let imagePrompt = "A photorealistic photo of a " + recipeObj["recipe"]["title"] + " with " + ingredients
+    console.log(imagePrompt);
+
 
     const response = await fetch("/api/image_predictions", {
       method: "POST",
@@ -68,7 +88,7 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt: newPrompt,
+        prompt: imagePrompt,
       }),
     });
     let outputImage = await response.json();
@@ -95,6 +115,7 @@ export default function Home() {
     console.log("hello there ryan")
     console.log(outputImage.output);
 
+
   };
 
   const previewImage = (event) => {
@@ -105,6 +126,7 @@ export default function Home() {
     };
     reader.readAsDataURL(event.target.files[0]);
   };
+
 
 
   return (
@@ -169,6 +191,7 @@ export default function Home() {
             <div className="image-wrapper mt-5">
               <p className="py-3 text-sm opacity-50">status: {prediction.output}</p>
 
+
               {/* <Image
                 fill
                 src={prediction.output[prediction.output.length - 1]}
@@ -197,7 +220,8 @@ export default function Home() {
           <p className="py-3 text-sm opacity-50">status: {outputImage.status}</p>
 
           <div className="recipeSection">
-            <RecipeComponent className="recipe" />
+            <RecipeComponent className="recipe" title={recipeObj["recipe"]["title"]} ingredients="Your Ingredients Here" steps="Your Steps Here" imageUrl="pasta.png" />
+
           </div>
         </>
       )}
