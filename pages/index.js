@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import Head from "next/head";
 import Image from "next/image";
+import RecipeComponent from './recipe.js';
+
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -112,7 +114,7 @@ export default function Home() {
       </Head>
 
       <header>
-        <h1>Culin<span styles="color:#FCE8E9;">AI</span></h1>
+        <h1>Culin<span style={{ color: "#FCE8E9" }}>AI</span></h1>
         <svg class="icon" viewBox="0 0 30 30" role="button">
           <title>Navigation Menu Icon</title>
           <line x1="8" x2="22" y1="12" y2="12" stroke="#FCE8E9" stroke-linecap="round" />
@@ -135,6 +137,8 @@ export default function Home() {
       </header>
 
       <p id="upload_text">Show us a photo of your fridge and we will make a recipe for you!</p>
+      <img id="output_image" height="50px" width="50px" alt="Preview" ref={imageRef} />
+
 
       <form className="w-full flex" onSubmit={handleSubmit}>
 
@@ -158,8 +162,6 @@ export default function Home() {
 
 
       {error && <div>{error}</div>}
-      <img id="output_image" height="50px" width="50px" alt="Preview" ref={imageRef} />
-
 
       {!loading && prediction && (
         <>
@@ -196,8 +198,12 @@ export default function Home() {
         </>
       )}
 
+      <div className="recipeSection">
+        <RecipeComponent className="recipe" />
+      </div>
 
 
     </div>
+
   );
 }
