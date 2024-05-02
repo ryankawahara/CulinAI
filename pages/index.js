@@ -195,12 +195,14 @@ export default function Home() {
             </div>
           )}
           <p className="py-3 text-sm opacity-50">status: {outputImage.status}</p>
+
+          <div className="recipeSection">
+            <RecipeComponent className="recipe" />
+          </div>
         </>
       )}
 
-      <div className="recipeSection">
-        <RecipeComponent className="recipe" />
-      </div>
+
 
 
     </div>
