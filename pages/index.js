@@ -24,7 +24,7 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt: "Analyze the provided image for food ingredients; if found, generate a JSON object with 'contains_food': true and 'food_items' listing up to 10 identified ingredients, otherwise 'contains_food': false with empty 'food_items'. If food is present, use the identified ingredients to create a random and detailed cooking recipe, including ingredients from the list, providing step-by-step directions separated by '--', an estimated cooking time, and a difficulty level out of 5.",
+        prompt: "Analyze the provided image to identify any food ingredients and return a JSON object with 'contains_food': true and a list of up to 10 ingredients under 'food_items' if detected, or 'contains_food': false with an empty 'food_items' list if none are found; if ingredients are identified, also generate a JSON-formatted recipe that includes a creatively titled 'title', a detailed list of 'ingredients', step-by-step 'instructions' with each step separated by ',', an estimated 'cooking_time' in minutes, and a 'difficulty' rating from 1 to 5, with additional suggestions for garnishes and serving tips.",
         image: imageRef.current.src, // Access the src of the image
       }),
     });
