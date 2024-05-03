@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Loading Your Recipe</title>
+        <style>
+            body {
+                background-size: 22.5px 22.5px;
+                background-image:
+                    linear-gradient(to right, rgba(128, 128, 128, 0.198) 2px, transparent 2px),
+                    linear-gradient(to bottom, rgba(128, 128, 128, 0.198) 2px, transparent 2px);
+                text-align: center;
+                margin: 0;
+                height: 100vh; /* Ensure body takes up full viewport height */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Lexend-Peta-Bold;
+            }
+            @font-face {
+                font-family: Lexend-Peta-Bold;
+                src: url(Lexend_Peta/static/LexendPeta-Bold.ttf);
+            }
+            #loading {
+                width: 600px; 
+                height: auto; 
+                position: absolute;
+                top: 50%; 
+                left: 50%; 
+                transform: translate(-50%, -50%); 
+            }
+            p{
+                position: absolute;
+                top: 62%; 
+                left: 49.5%; 
+                transform: translate(-50%, -50%); 
+                color:#577F5F
+            }
+
+
+
+        </style>
+    </head>
+    <body>
+        <img id="loading" src="generating.gif" width="600px">
+        <script src="index.js"></script>
+        <script src="to_recipe.js"></script>
+        <p>LOADING...</p>
+    </body>
+</html>
