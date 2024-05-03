@@ -30,6 +30,7 @@ const SavedRecipes = () => {
                         justify-content: flex; // Centers boxes horizontally
                     }
                     .box {
+                        
                         position: absolute;
 
                         width: 300px;
