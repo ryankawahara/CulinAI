@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import Head from "next/head";
 import Image from "next/image";
+import Link from 'next/link';
 import RecipeComponent from './recipe.js';
 
 
@@ -137,24 +138,20 @@ export default function Home() {
 
       <header>
         <h1>Culin<span style={{ color: "#FCE8E9" }}>AI</span></h1>
-        <svg class="icon" viewBox="0 0 30 30" role="button">
+        <svg className="icon" viewBox="0 0 30 30" role="button">
           <title>Navigation Menu Icon</title>
-          <line x1="8" x2="22" y1="12" y2="12" stroke="#FCE8E9" stroke-linecap="round" />
-          <line x1="8" x2="22" y1="18" y2="18" stroke="#FCE8E9" stroke-linecap="round" />
-          <line x1="8" x2="22" y1="24" y2="24" stroke="#FCE8E9" stroke-linecap="round" />
+          <line x1="8" x2="22" y1="12" y2="12" stroke="#FCE8E9" strokeLinecap="round" />
+          <line x1="8" x2="22" y1="18" y2="18" stroke="#FCE8E9" strokeLinecap="round" />
+          <line x1="8" x2="22" y1="24" y2="24" stroke="#FCE8E9" strokeLinecap="round" />
         </svg>
-        <nav class="hidden">
-          <a href="index.html">home</a>
-          <a href="#">explore page</a>
-          <a href="saved.html">saved recipes</a>
-        </nav>
+
       </header>
 
       <header>
         <nav>
-          <a href="/">Home</a>
-          <a href="#">Explore Page</a>
-          <a href="/saved">Saved Recipes</a>
+          <Link href="/">Home</Link>
+          <Link href="#">Explore Page</Link>
+          <Link href="/saved">Saved Recipes</Link>
         </nav>
       </header>
 
