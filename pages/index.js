@@ -171,6 +171,7 @@ export default function Home() {
         <button className="button" type="submit">
           Generate Recipe!
         </button>
+
       </form>
 
       {loading && <p>
