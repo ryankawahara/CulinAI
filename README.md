@@ -14,8 +14,14 @@ CulinAI is for those who:
 We wanted to explore the idea of “cooking with nothing.”
 CulinAI answers “What should I eat today?” without wasting or buying food.
 
+### User Workflow
+- Users upload ingredient photos via an easy-to-use homepage interface
+- Uploaded images are analyzed by the LLaVa model to detect ingredients
+- LLaVa uses detected ingredients to create and display recipes with Stable Diffusion-generated visuals
+
 ## Demo
 
+https://github.com/user-attachments/assets/b4e3a8fe-7e37-4fd2-9273-5e4bec5eb3ae
 
 ## Noteworthy files
 We used this [Next.js](https://nextjs.org/) template project that's preconfigured to work with Replicate's API.
