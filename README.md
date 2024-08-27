@@ -1,10 +1,24 @@
-## Getting started with Next.js and Replicate
+# CulinAI - Spring 2024 Tech Treks
+#### Leia Yun, Phoebe Huang, Ann Lee, Ryan Kawahara (Tutor)
+## Overview
+### Purpose
+CulinAI is an AI-powered site that allows users to generate recipes by uploading a photo of their fridge or food items.
 
-This is a [Next.js](https://nextjs.org/) template project that's preconfigured to work with Replicate's API.
+### Users
+CulinAI is for those who:
+- Want to try new recipes 
+- Want to reduce food waste
+-Don’t know what they can cook using the groceries that they already have
 
-You can use this as a quick jumping-off point to build a web app using Replicate's API, or you can recreate this codebase from scratch by following the guide at [replicate.com/docs/get-started/nextjs](https://replicate.com/docs/get-started/nextjs)
+### Why?
+We wanted to explore the idea of “cooking with nothing.”
+CulinAI answers “What should I eat today?” without wasting or buying food.
+
+## Demo
+
 
 ## Noteworthy files
+We used this [Next.js](https://nextjs.org/) template project that's preconfigured to work with Replicate's API.
 
 - [pages/index.js](pages/index.js) - The React frontend that renders the home page in the browser
 - [pages/api/predictions/index.js](pages/api/predictions/index.js) - The backend API endpoint that calls Replicate's API to create a prediction
@@ -34,4 +48,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 For detailed instructions on how to create and use this template, see [replicate.com/docs/get-started/nextjs](https://replicate.com/docs/get-started/nextjs)
 
-<img width="707" alt="iguana" src="https://github.com/replicate/getting-started-nextjs/assets/14149230/5d1933ec-a083-4de6-90e2-7552e33e4a85">
+<img width="707" alt="iguana" src="https://github.com/user-attachments/assets/4e0f4e7c-da88-410e-95b9-d74e0e58ddf4">
